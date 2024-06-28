@@ -1,0 +1,30 @@
+[GLOBAL]
+pants_version = "2.21.0"
+backend_packages = [
+  "pants.backend.experimental.go",
+  "pants.backend.python",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.typecheck.mypy",
+]
+
+[python]
+interpreter_constraints = ["CPython~=3.10.9"]
+enable_resolves = true
+default_resolve = "test"
+
+[python.resolves]
+test = "test.lock"
+mypy = "pants-mypy.lockfile"
+
+[mypy]
+install_from_resolve = "mypy"
+requirements = ["//:mypy"]
+
+[python-bootstrap]
+names = ["python3.10", "python3"]
+search_path = [
+  # the interpreter specified in the local file .python-version
+  "<PYENV_LOCAL>",
+  # This will use all interpreters in `$(pyenv root)/versions`.
+  "<PYENV>",
+]
