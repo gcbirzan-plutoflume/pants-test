@@ -1,0 +1,15 @@
+[GLOBAL]
+pants_version = "2.21.0"
+backend_packages = [
+  "pants.backend.experimental.go",
+  "pants.backend.python",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.typecheck.mypy",
+]
+
+[python]
+interpreter_constraints = ["CPython>=3.7"]
+
+
+[environments-preview.names]
+test = "//:test"
